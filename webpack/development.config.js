@@ -33,9 +33,11 @@ var browserConfig = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [
-                    { loader: 'style-loader' },
+                    {
+                        loader: 'style-loader',
+                    },
                     {
                         loader: 'css-loader',
                         options: {
@@ -44,9 +46,7 @@ var browserConfig = {
                             },
                         },
                     },
-                    { loader: 'postcss-loader' }
-
-                ],
+                ]
             },
         ]
     },
@@ -89,7 +89,7 @@ var serverConfig = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [
                     {
                         loader: 'isomorphic-style-loader',
@@ -102,8 +102,8 @@ var serverConfig = {
                             },
                         },
                     },
-                    { loader: 'postcss-loader' }
-                ],
+                ]
+                // use: ['style-loader', 'css-loader'],
             },
         ]
     },

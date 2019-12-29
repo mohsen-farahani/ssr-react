@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 import Axios from 'axios';
-import '../styles/App.css'
+import styles from '../../styles/main.css'
+import Masonry from 'react-masonry-css'
 
 
 function Navbar() {
@@ -13,24 +14,37 @@ function Navbar() {
 
     }, []);
 
+    const items = data.length > 0 ? data.map((value, key) => {
+        return (
+            <div key={key}>
+                <NavLink activeStyle={{ fontWeight: 'bold' }} to={`/post/${value.hash_id}`}>
+                    {value.title}
+                </NavLink>
+            </div>
+        )
+    }) : ""
 
+    const breakpointColumnsObj = {
+        default: 4,
+        1100: 3,
+        700: 2,
+        500: 1
+    };
     return (
         <div>
-            <div styleName="app">
-                Test postcss
-            </div>
 
-            <ul>
-                {data.length > 0 ? data.map((value, key) => {
-                    return (
-                        <li key={key}>
-                            <NavLink activeStyle={{ fontWeight: 'bold' }} to={`/post/${value.hash_id}`}>
-                                {value.title}
-                            </NavLink>
-                        </li>
-                    )
-                }) : ""}
-            </ul>
+            <div className={styles.app}>salam</div>
+
+            <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className={styles.myMasonryGgrid}
+                columnClassName={styles.myMasonryGridColumn}
+            >
+                {items}
+            </Masonry>
+
+
+
         </div>
     );
 }
