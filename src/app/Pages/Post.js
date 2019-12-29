@@ -44,37 +44,37 @@ class Post extends Component {
                 loading: false,
             })))
     }
-    htmlParserTransform(node, index) {
-        if (node.name === "script") {
-            const { type } = node.attribs
-            const { children } = node
 
-            const result = (
-                <script type={type} dangerouslySetInnerHTML={
-                    {
-                        __html: `${children[0].data}`
-                    }
-                }
-                />
-            )
-
-            return result
-        }
-    }
 
     render() {
+
+        const htmlParserTransform = (node, index) => {
+            if (node.name === "script") {
+                const { type } = node.attribs
+                const { children } = node
+                const res = (
+                    <script type={type}>
+                        {children[0].data}
+                    </script>
+                )
+                return res
+            }
+        }
+
         const { loading, repos } = this.state
 
         if (loading === true) {
             return <p>LOADING</p>
         }
 
+
         return (
             <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
                 <Helmet>
                     <title>{repos.title}</title>
-                    {ReactHtmlParser(repos.meta)}
+                    {ReactHtmlParser(repos.meta, { transform: htmlParserTransform })}
                 </Helmet>
+
 
                 <img src={repos.img} />
                 <h1>{repos.caption}</h1>

@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  client:
+    container_name: ssr-react
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://127.0.0.1:3000"]
+        interval: 1m30s
+        timeout: 10s
+        retries: 3
+        start_period: 40s
+    labels: 
+      - "APP=CLIENT"
+    scale: 1
+    env_file:
+     - ../.env

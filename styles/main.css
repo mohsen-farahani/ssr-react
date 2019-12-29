@@ -1,10 +1,13 @@
 @import "./colors.css";
-body{
-    background: #010000;
+body {
+  background: #f1f1f1;
+}
+a {
+  color: #fff;
 }
 .app {
   border: 1px solid var(--errorRed);
-  color:blue
+  color: blue;
 }
 
 .myMasonryGgrid {
@@ -20,7 +23,8 @@ body{
 }
 
 /* Style your items */
-.myMasonryGridColumn > div { /* change div to reference your elements you put in <Masonry> */
+.myMasonryGridColumn > div {
+  /* change div to reference your elements you put in <Masonry> */
   background: grey;
   margin-bottom: 30px;
 }

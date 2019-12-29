@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack')
 
 
 const publicDir = path.resolve(__dirname, '../public');
@@ -57,7 +58,11 @@ var browserConfig = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[id].css',
-        })
+        }),
+        new Dotenv({
+            path: path.join(__dirname, '.env'),
+            systemvars: true
+        }),
     ]
 }
 
@@ -110,7 +115,11 @@ var serverConfig = {
     plugins: [
         new webpack.DefinePlugin({
             __isBrowser__: "false"
-        })
+        }),
+        new Dotenv({
+            path: path.join(__dirname, '.env'),
+            systemvars: true
+        }),
     ]
 }
 
